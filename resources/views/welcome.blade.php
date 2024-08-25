@@ -9,5 +9,6 @@
     <x-slot:heading>
         Home
     </x-slot:heading>
+    
     <h1>Your are in Home page</h1>
 </x-layout>
