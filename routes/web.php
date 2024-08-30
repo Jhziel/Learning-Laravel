@@ -5,16 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Job;
 
 Route::get('/', function () {
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-    return view('welcome');
-=======
 
-    return view('welcome',);
->>>>>>> Stashed changes
-=======
-    return view('welcome',);
->>>>>>> 4a20327ce9fef09f8b0262a68d512064d00dc6b5
+    $jobs = Job::all();
+    return view('welcome', ['jobs' => $jobs]);
 });
 Route::get('/jobs', function () {
     return view('jobs', ['jobs' => Job::all()]);
