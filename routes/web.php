@@ -6,11 +6,14 @@ use App\Models\Job;
 
 Route::get('/', function () {
 
-    $jobs = Job::all();
-    return view('welcome', ['jobs' => $jobs]);
+    return view('welcome');
 });
 Route::get('/jobs', function () {
-    $jobs = Job::with('employer')->get();
+    //getting all data with associated with employer
+    /* $jobs = Job::with('employer')->get(); */
+
+    //getting using Pagination
+    $jobs=Job::with('employer')->paginate(3);
     return view('jobs', ['jobs' => $jobs]);
 });
 Route::get('/jobs/{id}', function ($id) {
