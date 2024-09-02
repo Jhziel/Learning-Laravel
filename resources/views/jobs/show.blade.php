@@ -2,13 +2,13 @@
     <x-slot:heading>
         Jobs
     </x-slot:heading>
-    <h1>List of Jobs</h1>
-    <ul>
+    <ul class="mb-3">
 
         <li class="mt-3">
-            <p class="font-bold underline">Job Title:{{ $job['title'] }}</p>
+            <p class="font-bold underline">Job Title:{{ $job->title }}</p>
             <p>Salary:{{ $job['salary'] }}</p>
         </li>
-
     </ul>
+
+    <a href="/jobs/{{ $job->id }}/edit" class="bg-blue-500 py-2 px-4 text-slate-200">Edit</a>
 </x-layout>
