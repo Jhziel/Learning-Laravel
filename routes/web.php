@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Arr;
+use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Job;
 
@@ -8,79 +8,62 @@ Route::get('/', function () {
 
     return view('welcome');
 });
+//One way of calling static view
+/* Use this method if the page is static not needed of any  data */
+Route::view('/contact', 'contact');
 
-//Index
-Route::get('/jobs', function () {
+
+
+
+//Not using Dedicated Controller action
+/* Route::get('/jobs', function () {
     //getting all data with associated with employer
-    /* $jobs = Job::with('employer')->get(); */
+   // $jobs = Job::with('employer')->get(); 
 
     //getting using Pagination
     $jobs = Job::with('employer')->latest()->paginate(3);
     return view('jobs.index', ['jobs' => $jobs]);
-});
+}); */
 
-//Create
-Route::get('/jobs/create', function () {
+//Using Group Route
+/* Route::controller(JobController::class)->group(function () {
 
-    return view('jobs.create');
-});
+Route::get('/jobs', [JobController::class, 'index']);
 
-//Edit
-Route::get('/jobs/{job}/edit', function (Job $job) {
+    Route::get('/jobs/create', 'create')->name('job.create');
 
-    return view('jobs.edit', ['job' => $job]);
-});
+    Route::get('/jobs/{job}/edit', 'edit');
 
-//Show
-Route::get('/jobs/{job}', function (Job $job) {
+    Route::get('/jobs/{job}', 'show');
 
-    return view('jobs.show', ['job' => $job]);
-});
+    Route::post('/jobs', 'store');
 
-//Store
-Route::post('/jobs', function () {
+    Route::patch('/jobs/{job}', 'update');
+
+    Route::delete('/jobs/{job}', 'destroy');
+}); */
 
 
-    request()->validate([
-        'title' => ['required'],
-        'salary' => ['required']
-    ]);
 
-    Job::create([
-        'title' => request('title'),
-        'salary' => $_POST['salary'],
-        'employer_id' => 1
-    ]);
+/* 
+Route::get('/jobs', [JobController::class, 'index']);
+Route::get('/jobs/create', [JobController::class, 'create'])->name('job.create');
 
-    return redirect('/jobs');
-});
+Route::get('/jobs/{job}/edit', [JobController::class, 'edit']);
 
-//UPDATE
-Route::patch('/jobs/{job}', function (Job $job) {
-    request()->validate([
-        'title' => ['required'],
-        'salary' => ['required']
-    ]);
+Route::get('/jobs/{job}', [JobController::class, 'show']);
 
-    /* 1 way of updating data in database */
-    /* $job->title = request('title');
-    $job->salary = request('salary');
-    $job->save(); */
+Route::post('/jobs', [JobController::class, 'store']);
 
-    $job->update([
-        'title' => request('title'),
-        'salary' => request('salary')
-    ]);
-    return redirect('/jobs');
-});
+Route::patch('/jobs/{job}', [JobController::class, 'update']);
 
-//Destroy
-Route::delete('/jobs/{job}', function (Job $job) {
+Route::delete('/jobs/{job}', [JobController::class, 'destroy']); */
 
-    $job->delete();
-    return redirect('/jobs');
-});
+//2 ways if you dont need all routes
+Route::resource('jobs', JobController::class/* , [
+    //expect means use all except destroy
+    //'except' => ['destroy']
 
-Route::get('/contact', function () {
-    return view('contact');
-});
+    //only means use all the route you declare
+    //'only' => ['index']
+] */);

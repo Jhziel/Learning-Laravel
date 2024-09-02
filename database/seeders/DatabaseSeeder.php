@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Employer;
 use App\Models\Job;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -22,6 +23,12 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('pass123')
         ]);
 
-        Job::factory(100)->create();
+        Job::factory(15)->create();
+        Employer::factory(1)->create(
+            [
+                'id' => 1
+
+            ]
+        );
     }
 }
