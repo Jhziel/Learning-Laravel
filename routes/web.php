@@ -21,14 +21,23 @@ Route::get('/jobs/create', function () {
 
     return view('jobs.create');
 });
+Route::get('/jobs/{id}/edit', function (Job $job) {
 
-Route::get('/jobs/{id}', function ($id) {
+    return view('jobs.edit', ['job' => $job]);
+});
 
-    $job = Job::find($id);
+Route::get('/jobs/{id}', function (Job $job) {
+
     return view('jobs.show', ['job' => $job]);
 });
 
 Route::post('/jobs', function () {
+
+
+    request()->validate([
+        'title' => ['required'],
+        'salary' => ['required', 'integer']
+    ]);
 
     Job::create([
         'title' => request('title'),
