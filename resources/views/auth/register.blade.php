@@ -29,10 +29,9 @@
                 <x-form-error name="password" />
 
                 {{-- Confirm Password --}}
-                <x-form-label for="confirm_password">Confirm Password:</x-form-label>
-                <x-form-input type="confirm_password" name="confirm_password" id="confirm_password"
+                <x-form-label for="password_confirmation">Confirm Password:</x-form-label>
+                <x-form-input type="password" name="password_confirmation" id="password_confirmation"
                     placeholder="Enter the Confirm Password" />
-                <x-form-error name="confirm_password" />
 
                 {{-- Field Button --}}
                 <x-form-button>Register</x-form-button>

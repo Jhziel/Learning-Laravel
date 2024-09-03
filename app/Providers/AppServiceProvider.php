@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\Rules\Password;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,5 +24,14 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::preventLazyLoading();
         Paginator::useTailwind();
+        Password::defaults(function () {
+            $rule = Password::min(8)->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()
+                ->uncompromised();
+
+            return $rule;
+        });
     }
 }
