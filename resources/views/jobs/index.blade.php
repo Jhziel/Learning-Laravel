@@ -2,7 +2,10 @@
     <x-slot:heading>
         Jobs
     </x-slot:heading>
-    <h1>List of Jobs</h1>
+    <div class="flex justify-between mb-2 items-center">
+        <h1>List of Jobs</h1>
+        <a href="/jobs/create" class="bg-blue-500 py-2 px-4 text-slate-200">Create</a>
+    </div>
     <div class="space-y-4">
         @foreach ($jobs as $job)
             <a href="jobs/{{ $job['id'] }}" class="  px-4 block py-3 border border-gray-400 rounded-md">
