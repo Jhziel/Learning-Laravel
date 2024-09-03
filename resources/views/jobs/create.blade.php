@@ -5,22 +5,17 @@
             @csrf
             <div class="flex flex-col gap-2">
                 {{-- Title --}}
-                <label for="title" class="text-lg font-bold ">Title:</label>
-                <input type="text" name="title" id="title"
-                    class="bg-white shadow-md text-md py-2 px-3 rounded-lg ring-1 ring-gray-400"
-                    placeholder="Enter the Position">
-                @error('title')
-                    <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                @enderror
+                <x-form-label for="title">Title:</x-form-label>
+                <x-form-input type="text" name="title" id="title" placeholder="Enter the Position" />
+                <x-form-error name="title" />
+
                 {{-- Salary --}}
-                <label for="salary" class="text-lg font-bold ">Salary:</label>
-                <input type="text" name="salary" id="salary"
-                    class="bg-white  shadow-md text-md py-2 px-3 rounded-lg ring-1 ring-gray-400"
-                    placeholder="Enter the Salary">
-                @error('salary')
-                    <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                @enderror
-                <button type="submit" class="bg-blue-500 py-2 px-4 text-slate-200 mt-2">Submit</button>
+                <x-form-label for="salary">Salary:</x-form-label>
+                <x-form-input type="text" name="salary" id="salary" placeholder="Enter the Salary" />
+                <x-form-error name="salary" />
+
+                {{-- Field Button --}}
+                <x-form-button>Submit</x-form-button>
             </div>
         </form>
 
