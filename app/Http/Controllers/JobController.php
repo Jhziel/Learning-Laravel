@@ -43,7 +43,7 @@ class JobController extends Controller
         //the authorize method will run the logic associated with the name edit-job
         /*   Gate::authorize('edit-job', $job); */
 
-
+        
         //Customize the gate if Fail
         /*  if(Gate::denies('edit-job', $job)){
         // If gate denies inside in here will excute
