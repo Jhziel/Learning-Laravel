@@ -6,7 +6,8 @@
             <div class="flex flex-col gap-2">
                 {{-- Title --}}
                 <x-form-label for="email">Email</x-form-label>
-                <x-form-input type="email" name="email" id="email" placeholder="Enter the Email" />
+                <x-form-input type="email" name="email" id="email" :value="old('email')"
+                    placeholder="Enter the Email" />
                 <x-form-error name="email" />
 
                 {{-- Salary --}}
