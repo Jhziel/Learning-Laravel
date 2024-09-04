@@ -89,7 +89,7 @@ Route::delete('/jobs/{job}', [JobController::class, 'destroy']); */
 Route::get('/jobs', [JobController::class, 'index']);
 Route::get('/jobs/create', [JobController::class, 'create'])->name('job.create');
 
-Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->middleware('auth')->can('edit-job', 'job');
+Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->middleware('auth')->can('edit', 'job');
 
 Route::get('/jobs/{job}', [JobController::class, 'show']);
 
