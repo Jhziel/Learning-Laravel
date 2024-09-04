@@ -27,20 +27,22 @@ class JobController extends Controller
     public function edit(Job $job)
     {
         // Inline Authorization
-        /* if (Auth::guest()) {
+        /*  if (Auth::guest()) {
             return redirect('/login');
-        }
+        } */
 
-        if ($job->employer->user->isNot(Auth::user())) {
+        /*  if ($job->employer->user->isNot(Auth::user())) {
             abort(403);
         } */
 
-        Gate::define('edit-job', function (User $user, Job $job) {
+        /* Gate::define('edit-job', function (User $user, Job $job) {
             return $job->employer->user->is($user);
-        });
+        }); */
 
-        //This code if fail always return an  abort(403)
-        Gate::authorize('edit-job', $job);
+        //This code always return abort(403) if fail
+        //the authorize method will run the logic associated with the name edit-job
+        /*   Gate::authorize('edit-job', $job); */
+
 
         //Customize the gate if Fail
         /*  if(Gate::denies('edit-job', $job)){
