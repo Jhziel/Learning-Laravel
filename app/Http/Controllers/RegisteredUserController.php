@@ -12,7 +12,7 @@ class RegisteredUserController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a user.
      */
     public function create()
     {
@@ -20,7 +20,7 @@ class RegisteredUserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created user in storage.
      */
     public function store(Request $request)
     {

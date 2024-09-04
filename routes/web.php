@@ -19,8 +19,9 @@ Route::view('/contact', 'contact');
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('auth.register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/login', [SessionController::class, 'create']);
+Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
+Route::post('/logout', [SessionController::class, 'destroy']);
 
 
 
@@ -75,4 +76,4 @@ Route::resource('jobs', JobController::class/* , [
 
     //only means use all the route you declare
     //'only' => ['index']
-] */);
+] */)->middleware('auth');
