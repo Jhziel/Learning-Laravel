@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Job;
+use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
     public function index()
     {
-        $jobs = Job::with('employer')->latest()->paginate(5);
+        // if you want to get the user without lazy loading
+        // $jobs = Job::with('employer.user')->latest()->paginate(5);
+        $jobs = Job::with('employer.user')->latest()->paginate(5);
         return view('jobs.index', ['jobs' => $jobs]);
     }
 
@@ -20,6 +23,17 @@ class JobController extends Controller
 
     public function edit(Job $job)
     {
+        // Inline Authorization
+        /* if (Auth::guest()) {
+            return redirect('/login');
+        }
+
+        if ($job->employer->user->isNot(Auth::user())) {
+            abort(403);
+        } */
+
+        
+        
 
         return view('jobs.edit', ['job' => $job]);
     }

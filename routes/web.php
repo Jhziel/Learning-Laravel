@@ -76,4 +76,4 @@ Route::resource('jobs', JobController::class/* , [
 
     //only means use all the route you declare
     //'only' => ['index']
-] */)->middleware('auth');
+] */);
