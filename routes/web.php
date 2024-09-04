@@ -70,10 +70,31 @@ Route::patch('/jobs/{job}', [JobController::class, 'update']);
 Route::delete('/jobs/{job}', [JobController::class, 'destroy']); */
 
 //2 ways if you dont need all routes
-Route::resource('jobs', JobController::class/* , [
+/* Route::resource('jobs', JobController::class, [
     //expect means use all except destroy
     //'except' => ['destroy']
 
     //only means use all the route you declare
     //'only' => ['index']
-] */);
+]); */
+
+//if you want to not use all of the content of jobs when not sign in 
+// Route::resource('jobs', JobController::class)->middleware('auth');
+
+// Use this to customize the page you want the user to if not sign in
+
+
+// Publicly accessible routes
+
+Route::get('/jobs', [JobController::class, 'index']);
+Route::get('/jobs/create', [JobController::class, 'create'])->name('job.create');
+
+Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->middleware('auth')->can('edit-job', 'job');
+
+Route::get('/jobs/{job}', [JobController::class, 'show']);
+
+Route::post('/jobs', [JobController::class, 'store']);
+
+Route::patch('/jobs/{job}', [JobController::class, 'update']);
+
+Route::delete('/jobs/{job}', [JobController::class, 'destroy']);
