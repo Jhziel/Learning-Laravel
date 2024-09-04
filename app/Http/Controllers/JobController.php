@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
 
 class JobController extends Controller
 {
@@ -32,8 +35,17 @@ class JobController extends Controller
             abort(403);
         } */
 
-        
-        
+        Gate::define('edit-job', function (User $user, Job $job) {
+            return $job->employer->user->is($user);
+        });
+
+        //This code if fail always return an  abort(403)
+        Gate::authorize('edit-job', $job);
+
+        //Customize the gate if Fail
+        /*  if(Gate::denies('edit-job', $job)){
+        // If gate denies inside in here will excute
+        }; */
 
         return view('jobs.edit', ['job' => $job]);
     }
