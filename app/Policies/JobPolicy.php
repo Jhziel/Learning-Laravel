@@ -12,4 +12,9 @@ class JobPolicy
     {
         return $job->employer->user->is($user);
     }
+    
+    public function show(User $user, Job $job): bool
+    {
+        return $job->employer->user->is($user);
+    }
 }

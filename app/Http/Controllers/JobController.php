@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\JobPosted;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
-
 
 class JobController extends Controller
 {
@@ -43,7 +43,7 @@ class JobController extends Controller
         //the authorize method will run the logic associated with the name edit-job
         /*   Gate::authorize('edit-job', $job); */
 
-        
+
         //Customize the gate if Fail
         /*  if(Gate::denies('edit-job', $job)){
         // If gate denies inside in here will excute
@@ -63,8 +63,11 @@ class JobController extends Controller
             'title' => ['required', 'min:4'],
             'salary' => ['required']
         ]);
-        $data['employer_id'] = 1;
-        Job::create($data);
+        $data['employer_id'] = Auth::user()->employer->id;
+        $job = Job::create($data);
+
+        Mail::to($job->employer->user)->send(new JobPosted($job));
+
         return redirect('/jobs');
     }
 
